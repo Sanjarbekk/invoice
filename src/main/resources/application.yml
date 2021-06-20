@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/invoice
+    username: invoice
+    password: 1
+    driverClassName: org.postgresql.Driver
+server:
+  port: 8080
