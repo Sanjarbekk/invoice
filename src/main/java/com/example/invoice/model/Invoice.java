@@ -24,9 +24,10 @@ public class Invoice {
     @NotNull
     private LocalDate due;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "order_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
+
 
     public Invoice() {
     }
