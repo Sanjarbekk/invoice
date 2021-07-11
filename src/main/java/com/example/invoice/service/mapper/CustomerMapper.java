@@ -6,5 +6,4 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = {})
 public interface CustomerMapper extends EntityMapper<CustomerDTO, Customer> {
-
 }
