@@ -29,14 +29,14 @@ public class CategoryResource {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/categories")
+    @GetMapping("/category/list")
     ResponseEntity<List<CategoryDTO>> getAllCategories() {
         log.debug("Get All Categories");
         List<CategoryDTO> result = categoryService.findAll();
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/categories/{productId}")
+    @GetMapping("/category/{productId}")
     ResponseEntity<CategoryDTO> getCategoryByProductId(@PathVariable Long productId) {
         log.debug("Get Category by productId : {}", productId);
         CategoryDTO result = categoryService.getCategoryByProductId(productId);

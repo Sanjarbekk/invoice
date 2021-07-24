@@ -45,6 +45,7 @@ public class DetailResource {
         detailService.delete(id);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/detail/{id}")
     public ResponseEntity<DetailDTO> getDetailById(@PathVariable Long id) {
         log.debug("REST request to get Detail : {}", id);

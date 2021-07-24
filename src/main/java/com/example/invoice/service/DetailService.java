@@ -1,8 +1,10 @@
 package com.example.invoice.service;
 
 import com.example.invoice.model.Detail;
+import com.example.invoice.repository.DetailFeedMapper;
 import com.example.invoice.repository.DetailRepository;
 import com.example.invoice.service.dto.DetailDTO;
+import com.example.invoice.service.dto.DetailFeedDTO;
 import com.example.invoice.service.mapper.DetailMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +22,13 @@ public class DetailService {
 
     private final DetailMapper detailMapper;
 
+    private final DetailFeedMapper detailFeedMapper;
+
     private final DetailRepository detailRepository;
 
-    public DetailService(DetailMapper detailMapper, DetailRepository detailRepository) {
+    public DetailService(DetailMapper detailMapper, DetailFeedMapper detailFeedMapper, DetailRepository detailRepository) {
         this.detailMapper = detailMapper;
+        this.detailFeedMapper = detailFeedMapper;
         this.detailRepository = detailRepository;
     }
 
@@ -76,5 +81,11 @@ public class DetailService {
     public void delete(Long id) {
         log.debug("Request to delete Detail : {}", id);
         detailRepository.deleteById(id);
+    }
+
+    public List<DetailFeedDTO> getAllByProductId(Long productId) {
+        return detailRepository.findAllByProductId(productId).stream()
+                .map(detailFeedMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
