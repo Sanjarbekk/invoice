@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,10 +61,11 @@ public class PaymentService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<PaymentDTO> findOneDto(Long id) {
+    public PaymentDTO findOneDto(Long id) {
         log.debug("Request to get Payment : {}", id);
         return paymentRepository.findById(id)
-                .map(paymentMapper::toDto);
+                .map(paymentMapper::toDto)
+                .orElse(null);
     }
 
     /**

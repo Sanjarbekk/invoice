@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,10 +61,11 @@ public class OrderService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<OrderDTO> findOneDto(Long id) {
+    public OrderDTO findOneDto(Long id) {
         log.debug("Request to get Order : {}", id);
         return orderRepository.findById(id)
-                .map(orderMapper::toDto);
+                .map(orderMapper::toDto)
+                .orElse(null);
     }
 
     /**

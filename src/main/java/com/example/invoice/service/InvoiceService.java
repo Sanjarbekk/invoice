@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,10 +61,11 @@ public class InvoiceService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<InvoiceDTO> findOneDto(Long id) {
+    public InvoiceDTO findOneDto(Long id) {
         log.debug("Request to get Invoice : {}", id);
         return invoiceRepository.findById(id)
-                .map(invoiceMapper::toDto);
+                .map(invoiceMapper::toDto)
+                .orElse(null);
     }
 
     /**

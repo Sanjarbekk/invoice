@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,10 +61,11 @@ public class ProductService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<ProductDTO> findOneDto(Long id) {
+    public ProductDTO findOneDto(Long id) {
         log.debug("Request to get Product : {}", id);
         return productRepository.findById(id)
-                .map(productMapper::toDto);
+                .map(productMapper::toDto)
+                .orElse(null);
     }
 
     /**
