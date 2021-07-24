@@ -5,7 +5,7 @@ import com.example.invoice.service.dto.InvoiceDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {OrderMapper.class})
 public interface InvoiceMapper extends EntityMapper<InvoiceDTO, Invoice> {
 
     @Mapping(source = "order.id", target = "orderId")

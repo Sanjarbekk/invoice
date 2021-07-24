@@ -5,7 +5,7 @@ import com.example.invoice.service.dto.ProductDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {CategoryMapper.class})
 public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
 
     @Mapping(source = "category.id", target = "categoryId")

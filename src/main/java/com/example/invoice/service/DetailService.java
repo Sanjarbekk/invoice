@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,10 +61,11 @@ public class DetailService {
      * @return the entity
      */
     @Transactional(readOnly = true)
-    public Optional<DetailDTO> findOneDto(Long id) {
+    public DetailDTO findOneDto(Long id) {
         log.debug("Request to get Detail : {}", id);
         return detailRepository.findById(id)
-                .map(detailMapper::toDto);
+                .map(detailMapper::toDto)
+                .orElse(null);
     }
 
     /**
