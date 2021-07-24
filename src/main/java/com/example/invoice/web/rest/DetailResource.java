@@ -27,7 +27,7 @@ public class DetailResource {
 
     @PostMapping("/detail")
     ResponseEntity<DetailDTO> createCategory(@Valid @RequestBody DetailDTO detailDTO) {
-        log.debug("Create New Detail: {}", detailDTO);
+        log.debug("Create New Detail : {}", detailDTO);
         DetailDTO result = detailService.save(detailDTO);
         return ResponseEntity.ok(result);
     }
@@ -45,7 +45,7 @@ public class DetailResource {
         detailService.delete(id);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/product/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<DetailDTO> getDetailById(@PathVariable Long id) {
         log.debug("REST request to get Detail : {}", id);
         DetailDTO result = detailService.findOneDto(id);
