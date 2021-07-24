@@ -3,6 +3,7 @@ package com.example.invoice.service;
 import com.example.invoice.model.Category;
 import com.example.invoice.repository.CategoryRepository;
 import com.example.invoice.service.dto.CategoryDTO;
+import com.example.invoice.service.dto.ProductDTO;
 import com.example.invoice.service.mapper.CategoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,12 @@ public class CategoryService {
 
     private final CategoryMapper categoryMapper;
 
-    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
+    private final ProductService productService;
+
+    public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper, ProductService productService) {
         this.categoryRepository = categoryRepository;
         this.categoryMapper = categoryMapper;
+        this.productService = productService;
     }
 
     /**
@@ -76,5 +80,16 @@ public class CategoryService {
     public void delete(Long id) {
         log.debug("Request to delete Category : {}", id);
         categoryRepository.deleteById(id);
+    }
+
+    public CategoryDTO getCategoryByProductId(Long productId) {
+        log.debug("get  Category by Product Id : {}", productId);
+        Long categoryId = getCategoryId(productId);
+        return findOneDto(categoryId);
+    }
+
+    private Long getCategoryId(Long productId) {
+        ProductDTO productDTO = productService.findOneDto(productId);
+        return productDTO.getCategoryId();
     }
 }

@@ -36,6 +36,13 @@ public class CategoryResource {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/categories/{productId}")
+    ResponseEntity<CategoryDTO> getCategoryByProductId(@PathVariable Long productId) {
+        log.debug("Get Category by productId : {}", productId);
+        CategoryDTO result = categoryService.getCategoryByProductId(productId);
+        return ResponseEntity.ok(result);
+    }
+
     @DeleteMapping("/category/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         log.debug("REST request to delete Category : {}", id);

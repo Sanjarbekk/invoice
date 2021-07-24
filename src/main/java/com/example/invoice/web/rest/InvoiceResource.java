@@ -2,12 +2,14 @@ package com.example.invoice.web.rest;
 
 import com.example.invoice.service.InvoiceService;
 import com.example.invoice.service.dto.InvoiceDTO;
+import com.example.invoice.web.rest.vm.InvoiceVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -47,6 +49,14 @@ public class InvoiceResource {
     public ResponseEntity<InvoiceDTO> getInvoiceById(@PathVariable Long id) {
         log.debug("REST request to get Invoice : {}", id);
         InvoiceDTO result = invoiceService.findOneDto(id);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/expired_invoices")
+    ResponseEntity<List<InvoiceVM>> getAllExpiredInvoices() {
+        log.debug("Invoices issued after their due date");
+        LocalDate date = LocalDate.now();
+        List<InvoiceVM> result = invoiceService.findAllExpiredInvoices(date);
         return ResponseEntity.ok(result);
     }
 }

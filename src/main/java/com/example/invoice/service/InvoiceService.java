@@ -4,11 +4,13 @@ import com.example.invoice.model.Invoice;
 import com.example.invoice.repository.InvoiceRepository;
 import com.example.invoice.service.dto.InvoiceDTO;
 import com.example.invoice.service.mapper.InvoiceMapper;
+import com.example.invoice.web.rest.vm.InvoiceVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +54,12 @@ public class InvoiceService {
         return invoiceRepository.findAll().stream()
                 .map(invoiceMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<InvoiceVM> findAllExpiredInvoices(LocalDate date) {
+        log.debug("Request to get all Invoices");
+        return invoiceRepository.findAllExpiredInvoices(date);
     }
 
     /**
