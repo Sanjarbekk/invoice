@@ -21,6 +21,11 @@ public class OrderDTO {
         this.customerId = customerId;
     }
 
+    public OrderDTO(LocalDate date, Long customerId) {
+        this.date = date;
+        this.customerId = customerId;
+    }
+
     public Long getId() {
         return id;
     }

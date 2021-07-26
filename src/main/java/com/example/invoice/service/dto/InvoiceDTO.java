@@ -22,6 +22,13 @@ public class InvoiceDTO {
     public InvoiceDTO() {
     }
 
+    public InvoiceDTO(Long amount, LocalDate issued, LocalDate due, Long orderId) {
+        this.amount = amount;
+        this.issued = issued;
+        this.due = due;
+        this.orderId = orderId;
+    }
+
     public InvoiceDTO(Long id, Long amount, LocalDate issued, LocalDate due, Long orderId) {
         this.id = id;
         this.amount = amount;
